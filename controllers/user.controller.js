@@ -1,6 +1,6 @@
 const { statusCodes } = require('../constants');
 
-const { userService } = require("../services");
+const { tokenService, userService } = require('../services');
 
 module.exports = {
     getAllUsers: async (req, res, next) => {
@@ -15,7 +15,8 @@ module.exports = {
 
     createUser: async (req, res, next) => {
         try {
-            const user = await userService.createUser(req.body);
+            const hashPassword = await tokenService.hashPassword(req.body.password);
+            const user = await userService.createUser({ ...req.body, password: hashPassword });
 
             res.status(statusCodes.CREATE).json(user);
         } catch (e) {
@@ -23,7 +24,7 @@ module.exports = {
         }
     },
 
-    getUserById: async (req, res, next) => {
+    getUserById: (req, res, next) => {
         try {
             const { user } = req;
 
@@ -56,4 +57,4 @@ module.exports = {
             next(e);
         }
     }
-}
+};

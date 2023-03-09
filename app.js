@@ -3,14 +3,15 @@ require('dotenv').config();
 const mongoose = require('mongoose');
 
 const { PORT, MONGO_URL } = require('./configs/config');
-const { carRouter, userRouter } = require('./routes');
-const { mainErrorHandler } = require("./errors");
+const { authRouter, carRouter, userRouter } = require('./routes');
+const { mainErrorHandler } = require('./errors');
 
 const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+app.use('/auth', authRouter);
 app.use('/cars', carRouter);
 app.use('/users', userRouter);
 
@@ -20,7 +21,10 @@ app.use('*', (req, res, next) => {
 
 app.use(mainErrorHandler);
 
+
 app.listen(PORT, () => {
+    // eslint-disable-next-line no-console
     console.log('App listen', PORT);
+    mongoose.set('strictQuery', true);
     mongoose.connect(MONGO_URL);
 });

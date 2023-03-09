@@ -1,4 +1,4 @@
-const User = require('../dataBase/User')
+const User = require('../dataBase/User');
 
 module.exports = {
     createUser(userObject) {
@@ -14,14 +14,15 @@ module.exports = {
     },
 
     getOneById(id) {
-        return User.findById(id).select(['+cars']).populate('cars');
+        return User.findById(id).select(['+cars'])
+            .populate('cars');
     },
 
     updateUserById(userId, newUserObject) {
-        return User.updateOne({ _id: userId }, newUserObject, { new: true });
+        return User.findOneAndUpdate({ _id: userId }, newUserObject, { new: true });
     },
 
     deleteUserById(userId) {
         return User.deleteOne({ _id: userId });
     }
-}
+};
