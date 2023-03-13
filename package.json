@@ -11,6 +11,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "aws-sdk": "^2.1333.0",
     "bcrypt": "^5.0.1",
     "dotenv": "^16.0.1",
     "email-templates": "^10.0.1",
@@ -19,12 +20,13 @@
     "jsonwebtoken": "^9.0.0",
     "mongoose": "^6.5.2",
     "nodemailer": "^6.7.8",
-    "pug": "^3.0.2"
+    "pug": "^3.0.2",
+    "swagger-ui-express": "^4.6.2"
   },
   "devDependencies": {
-    "nodemon": "^2.0.19",
+    "@types/nodemailer": "^6.4.5",
     "eslint": "8.22.0",
     "eslint-plugin-node": "^11.1.0",
-    "@types/nodemailer": "^6.4.5"
+    "nodemon": "^2.0.19"
   }
 }
